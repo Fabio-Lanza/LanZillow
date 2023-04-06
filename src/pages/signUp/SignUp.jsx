@@ -1,9 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signUp from "../../assets/signUp.png";
-import "./SignUp.css";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import OAuth from "../../components/OAuth/OAuth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { serverTimestamp, setDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
+import {toast} from 'react-toastify'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,12 +21,38 @@ export default function SignUp() {
   });
   const { name, email, password } = formData;
 
+  const navigate = useNavigate();
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
   };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      updateProfile(auth.currentUser, { displayName: name });
+
+      const user = userCredential.user;
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      setDoc(doc(db, "users", user.uid), formDataCopy);
+      toast.success("Sign Up was Successful")
+      navigate("/");
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <section>
@@ -29,7 +62,7 @@ export default function SignUp() {
           <img src={signUp} alt="key" />
         </div>
         <div className="form-box">
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit}>
             <input
               type="text"
               id="name"
