@@ -1,0 +1,29 @@
+.header-container{
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    height: 70px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.li-item{
+    cursor: pointer;
+    padding: 5px 15px;
+    color: var(--red-color);
+    font-weight: 500;  
+}
+
+.li-item:hover{
+    background: var(--red-color);
+    color: white;
+    border-radius: 25px;
+    
+}

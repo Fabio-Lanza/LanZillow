@@ -1,0 +1,23 @@
+.oauth-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--red-color);
+    width: 430px;
+    padding: 10px;
+    color: white;
+    font-size: large;
+    border-radius: 6px;
+}
+
+.oauth-btn:hover{
+    background-color: var(--red-hover-color);
+    transition: 0.3s;
+}
+
+.oauth-btn .icon{
+    margin-right: 10px;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 1.3rem;
+}

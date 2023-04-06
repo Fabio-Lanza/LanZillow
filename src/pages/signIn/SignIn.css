@@ -1,0 +1,106 @@
+section h1{
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+    font-weight: bold;
+    color: var(--red-color);
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 50px auto;
+}
+
+.image-box{
+    width: 400px;
+    margin: 5rem;
+}
+
+.image-box img{
+    width: 400px;
+}
+
+.form{
+    width: 430px;
+}
+
+.form-box{
+    width: 600px;
+    display: flex;
+    justify-content: center;   
+    align-items: center;
+    flex-direction: column; 
+    margin-left: 100px;
+}
+
+.form-box input{
+    padding: 10px;
+    width: 430px;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+}
+
+
+.input-password{
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input-password .icon-eye{
+ position: absolute;
+ top: 13px; 
+ right: 20px;
+ font-size: 1.2rem;
+ cursor: pointer;
+}
+
+.link-account{
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+    margin-bottom: 50px;
+}
+
+.link-account p span{
+    color: var(--red-color);
+    font-weight: 600;
+}
+
+.link-account .forgot{
+    color: var(--blue-color);
+    font-weight: 500;
+}
+
+/* Buttons======= */
+
+.btn-signIn{
+   background-color: var(--blue-color);
+   width: 430px;
+   padding: 10px;
+   color: white;
+   font-size: large;
+   border-radius: 6px;
+}
+
+.btn-signIn:hover{
+    background-color: var(--blue-hover-color);
+    transition: 0.3s;
+}
+
+
+.divide-button{
+    width: 430px;
+    margin: 10px 0;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.divide-button p{
+    text-align: center;
+
+}
+
