@@ -1,15 +1,29 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Forgot from "../../assets/forgot.png";
 import OAuth from "../../components/OAuth/OAuth";
+import { toast } from "react-toastify";
+import { sendPasswordResetEmail, getAuth } from "firebase/auth";
 
 export default function ForgotPassword() {
-  
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setEmail(e.target.value);
   };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
+      toast.success("Email was sent!");
+      navigate("/signIn");
+    } catch (error) {
+      toast.error("Could not reset the password");
+    }
+  }
 
   return (
     <section>
@@ -19,7 +33,7 @@ export default function ForgotPassword() {
           <img src={Forgot} alt="key" />
         </div>
         <div className="form-box">
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit}>
             <input
               type="email"
               id="email"
