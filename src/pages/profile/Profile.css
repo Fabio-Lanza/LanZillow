@@ -79,3 +79,17 @@ section h1 {
   gap: 1rem;
   font-size: 1.2rem;
 }
+
+.listing-container{
+  max-width: 72rem;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.listing-container h2{
+  font-weight: 500;
+  font-size: 2rem;
+  color: var(--red-color);
+  text-align: center;
+  margin-bottom: 1rem;
+}
