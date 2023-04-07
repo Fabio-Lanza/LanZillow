@@ -1,22 +1,20 @@
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import "./CreateListing.css";
 import { toast } from "react-toastify";
-import {
-  getStorage,
-  ref,
-  getDownloadURL,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase";
 
+
 export default function CreateListing() {
+  const navigate = useNavigate()
   const [geolocationEnabled, setgeolocationEnabled] = useState(true);
   const auth = getAuth();
   const [formData, setFormData] = useState({
-    type: "rent",
+    type: "sale",
     name: "",
     bedrooms: 1,
     bathrooms: 1,
@@ -76,7 +74,7 @@ export default function CreateListing() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (discountedPrice >= regularPrice) {
+    if (+discountedPrice >= +regularPrice) {
       toast.error("Discounted price needs to be less than regular price");
       return;
     }
@@ -129,7 +127,7 @@ export default function CreateListing() {
             }
           },
           (error) => {
-            reject(error);
+            reject(error)
           },
           () => {
             // Handle successful uploads on complete
@@ -153,14 +151,17 @@ export default function CreateListing() {
       ...formData,
       imgUrls,
       geolocation,
-      timestamp: serverTimestamp(),
+      timestamp: serverTimestamp()
     };
+
     delete formDataCopy.images;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
-    const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+    const docRef = await addDoc(collection (db, "listing"), formDataCopy);
     toast.success("Listing created");
-    
+    navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+
   }
+
 
   return (
     <main>
@@ -252,7 +253,7 @@ export default function CreateListing() {
           <button
             type="button"
             id="furnished"
-            value={false}
+            value={true}
             onClick={onChange}
             className="left-btn"
           >
@@ -322,7 +323,7 @@ export default function CreateListing() {
           <button
             type="button"
             id="offer"
-            value={false}
+            value={true}
             onClick={onChange}
             className="left-btn"
           >
@@ -372,7 +373,7 @@ export default function CreateListing() {
                   id="discountedPrice"
                   value={discountedPrice}
                   onChange={onChange}
-                  min="50"
+                  min="0"
                   max="40000000"
                   required={offer}
                 />
