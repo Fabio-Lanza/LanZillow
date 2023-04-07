@@ -16,7 +16,6 @@ export default function Oauth() {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log(user);
 
       //check if user exist
       const docRef = doc(db, "users", user.uid)
@@ -28,8 +27,7 @@ export default function Oauth() {
           email:user.email,
           timestamp: serverTimestamp(),
         })
-      }
-      
+      } 
       navigate("/");
     } catch (error) {
       console.log(error);

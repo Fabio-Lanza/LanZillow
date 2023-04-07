@@ -11,39 +11,71 @@ section h1 {
 }
 
 .form-container {
+  width: 550px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+ 
+  margin: 0 auto;
 }
 
-.form{
+.form-profile{
     width: 600px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    
 }
 
-.form input {
+.form-profile input {
   padding: 10px;
   width: 500px;
   border-bottom: 1px solid #ccc;
   outline: none;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border-radius: 6px;
 }
 
-.form .edit{
+.form-profile .edit{
     white-space: nowrap;
     width: 495px;
     display: flex;
     justify-content: space-between;
 }
 
-.form .edit p span{
+.form-profile .edit p span{
     color: var(--red-color);
     font-weight: 600;
+    cursor: pointer;
 }
 
-.form .edit p:nth-child(2){
+.form-profile .edit p:nth-child(2){
     color: var(--blue-color);
     font-weight: 600;
     cursor: pointer;
+}
+
+.list-btn{
+  background-color: var(--blue-color);
+  width: 500px;
+  padding: 4px;
+  color: white;
+  font-size: medium;
+  border-radius: 6px;
+  align-items: center;
+  margin-left: 50px;
+}
+
+.list-btn:hover{
+  background-color: var(--blue-hover-color);
+  transition: 0.3s;
+}
+
+.link{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
 }

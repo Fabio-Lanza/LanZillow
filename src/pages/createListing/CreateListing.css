@@ -1,0 +1,135 @@
+main {
+  width: 0 auto;
+  padding: 8px;
+}
+main h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  font-weight: bold;
+  color: var(--red-color);
+}
+
+.form-list {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.form-list p {
+  margin-bottom: 10px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-btn {
+  background-color: var(--slate-color);
+  width: 200px;
+  padding: 8px;
+  color: white;
+  font-size: medium;
+  border-radius: 6px;
+  margin-right: 20px;
+}
+
+.right-btn {
+  background-color: var(--slate-color);
+  width: 200px;
+  padding: 8px;
+  color: white;
+  font-size: medium;
+  border-radius: 6px;
+}
+
+.left-btn:hover{
+    background-color: rgb(75, 85, 97);
+}
+
+.right-btn:hover{
+    background-color: rgb(75, 85, 97);
+}
+
+ .form-list input{
+    padding: 10px;
+    width: 400px;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+ }
+
+ .form-list .bed-bath-container{
+    display: flex;
+ }
+
+ .form-list .bed-bath-container input{
+    width: 100px;
+    margin-right: 20px;
+ }
+ 
+ .form-list .parkingSpot-container{
+    display: flex;
+ }
+
+ .form-list .furnished-container{
+    display: flex;
+ }
+
+ .form-list textarea{
+    padding: 10px;
+    width: 400px;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    border-radius: 6px;
+ }
+
+ .price-container .price-month{
+    display: flex;
+ }
+
+ .price-container input{
+    width: 150px;
+    margin-right: 20px;
+ }
+
+ .discounted-container .price-month{
+    display: flex;
+ }
+
+ .discounted-container input{
+    width: 150px;
+    margin-right: 20px;
+ }
+
+ .images-container span{
+    font-size: 14px;
+ }
+
+ .images-container input{
+    padding: 10px;
+    width: 400px;
+    border: 1px solid #ccc;
+    background-color: white;
+    outline: none;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+ }
+
+ .create-btn{
+    background-color: var(--blue-color);
+    width: 400px;
+    padding: 8px;
+    color: white;
+    font-size: medium;
+    border-radius: 6px;
+    margin: 10px 0 30px 0;
+ }
+
+ .create-btn:hover{
+    background-color: var(--blue-hover-color);
+ }
