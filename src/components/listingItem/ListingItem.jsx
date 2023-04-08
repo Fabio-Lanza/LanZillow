@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import { MdLocationOn } from 'react-icons/md'
+import { FaTrash } from 'react-icons/fa'
 import './ListingItem.css'
 
-export default function ListingItem({ listing, id }) {
+export default function ListingItem({ listing, id, onDelete }) {
 
 
   return (
@@ -36,6 +37,12 @@ export default function ListingItem({ listing, id }) {
             </div>
         </div>
       </Link>
+      {onDelete && (
+        <FaTrash className="trash-icon"
+        onClick={()=>onDelete(listing.id)}
+        />
+      
+       )}
     </li>
   );
 }

@@ -75,3 +75,11 @@
     gap: 0.8rem;
     font-weight: 500;
 }
+
+.trash-icon{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    color: var(--red-color);
+    cursor: pointer;
+}
