@@ -10,9 +10,24 @@
     --slate-color: slategray;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     background: url('./assets/abstrate-bg.jpg');
     background-size: cover;
-    /* background: rgb(246,253, 244); */
     font-family: 'Montserrat', sans-serif;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after{
+    color: var(--slate-color);
+    font-weight: 600;
+}
+
+.swiper-pagination-progressbar,
+.swiper-pagination-progressbar-fill{
+    background-color: var(--slate-color) !important;
 }
