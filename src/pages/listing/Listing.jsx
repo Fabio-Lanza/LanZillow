@@ -15,13 +15,14 @@ import SwiperCore, {
 } from "swiper";
 import "swiper/css/bundle";
 import ContactLandLord from "../../components/ContactLandLord";
+import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet'
+
 
 export default function Listing() {
-
   const params = useParams();
   const auth = getAuth();
   const [listing, setListing] = useState(null);
-  const [contactLandlord, setContactLandlord] = useState(false)
+  const [contactLandlord, setContactLandlord] = useState(false);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
   SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -34,9 +35,9 @@ export default function Listing() {
       }
     }
     fetchListing();
-    console.log(listing);
   }, [params.listingId]);
-
+  
+  console.log(listing);
   return (
     <main>
       <Swiper
@@ -92,13 +93,12 @@ export default function Listing() {
         <div className="w-full">
           <p className="text-[22px] font-bold mb-7 text-blue-900">
             {listing?.name} - $
-            {listing?.offer
-              ? listing?.discountedPrice
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              : listing?.regularPrice
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            {listing?.offer ? 
+            listing?.discountedPrice.toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            : listing?.regularPrice.toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+
             {listing?.type === "rent" ? " / month" : ""}
           </p>
           <div className="flex font-semibold mt-6 mb-3">
@@ -123,11 +123,11 @@ export default function Listing() {
           <ul className="flex space-x-3 lg:space-x-10 font-semibold">
             <li className="flex items-center whitespace-nowrap">
               <FaBed className="tx-lg mr-1" />
-              {+listing?.bedroom > 1 ? `{listing.bedroom}Beds` : "1 Bed"}
+              {+listing?.bedrooms > 1 ? `${+listing?.bedrooms}Beds` : "1 Bed"}
             </li>
             <li className="flex items-center whitespace-nowrap">
               <FaBath className="tx-lg mr-1" />
-              {+listing?.bathroom > 1 ? `{listing.bathroom}Baths` : "1 Bath"}
+              {+listing?.bathrooms > 1 ? `${+listing?.bathrooms}Baths` : "1 Bath"}
             </li>
             <li className="flex items-center whitespace-nowrap">
               <FaParking className="tx-lg mr-1" />
@@ -139,9 +139,10 @@ export default function Listing() {
             </li>
           </ul>
 
-          {listing?.userRef == auth.currentUser?.uid && !contactLandlord &&(
+          {listing?.userRef == auth.currentUser?.uid && !contactLandlord && (
             <div className="mt-6">
-              <button onClick={()=> setContactLandlord(true)}
+              <button
+                onClick={() => setContactLandlord(true)}
                 className="px-7 py-3 bg-bluecolor
               text-white font-medium rounded hover:bg-bluehover-color w-full"
               >
@@ -150,12 +151,29 @@ export default function Listing() {
             </div>
           )}
           {contactLandlord && (
-            <ContactLandLord 
-            userRef={listing?.userRef}
-            listing={listing}/>
-          )}  
+            <ContactLandLord userRef={listing?.userRef} listing={listing} />
+          )}
         </div>
-        <div className="bg-blue-300 w-full h-[200px] lg-[400px] z-10 overflow-x-hidden"></div>
+
+        {/* //Map ================*/}
+        <div className="w-full h-[210px] md:h-[300px] z-10 overflow-x-hidden ">
+          <MapContainer
+            center={(listing?.geolocation.lat, listing?.geolocation.lng)}
+            zoom={13}
+            scrollWheelZoom={false}
+            style={{height: "100%" , width: "100%"}}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={(listing?.geolocation.lat, listing?.geolocation.lng)}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </MapContainer>
+        </div>
       </div>
     </main>
   );
